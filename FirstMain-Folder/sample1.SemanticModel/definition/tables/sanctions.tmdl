@@ -1,0 +1,140 @@
+table sanctions
+	lineageTag: 88b521e1-050d-4c0a-8d39-37778c050802
+
+	column 'Source.Name'
+		dataType: string
+		lineageTag: 6f21e805-2571-41f5-9b4c-4218ccdd5b3a
+		summarizeBy: none
+		sourceColumn: Source.Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Index
+		dataType: int64
+		formatString: 0
+		lineageTag: 33430348-38d7-4ee2-a803-e8dcb7513079
+		summarizeBy: sum
+		sourceColumn: Index
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Id'
+		dataType: string
+		lineageTag: c4578e2e-4175-4d29-858e-228c8fcd3dca
+		summarizeBy: none
+		sourceColumn: Account Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Lead Owner'
+		dataType: string
+		lineageTag: 23ebf02a-edc8-43c2-b5bf-03ae2db328a6
+		summarizeBy: none
+		sourceColumn: Lead Owner
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'First Name'
+		dataType: string
+		lineageTag: 358fc1d7-e4bf-461c-bd5f-5e83a84e491e
+		summarizeBy: none
+		sourceColumn: First Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Name'
+		dataType: string
+		lineageTag: 73cae4de-8856-4f67-954a-5156e4f5c91b
+		summarizeBy: none
+		sourceColumn: Last Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Company
+		dataType: string
+		lineageTag: 082a7eca-2601-4b40-a21e-27238c64d5fc
+		summarizeBy: none
+		sourceColumn: Company
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Phone 1'
+		dataType: string
+		lineageTag: 7a96a7ca-b467-497e-a72f-5f0ffd34f084
+		summarizeBy: none
+		sourceColumn: Phone 1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Phone 2'
+		dataType: string
+		lineageTag: 29b6fa23-a324-42a3-bec9-8e13c5bc0ea4
+		summarizeBy: none
+		sourceColumn: Phone 2
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email 1'
+		dataType: string
+		lineageTag: d0b39f8f-dad8-4a7f-bc3a-98ed22a6b39b
+		summarizeBy: none
+		sourceColumn: Email 1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email 2'
+		dataType: string
+		lineageTag: ceef8945-f4ee-4878-b49c-640af1d89fe8
+		summarizeBy: none
+		sourceColumn: Email 2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Website
+		dataType: string
+		lineageTag: c734b1c9-d492-41b6-91de-175d333f5167
+		summarizeBy: none
+		sourceColumn: Website
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source
+		dataType: string
+		lineageTag: fdc54cf4-a838-4b72-b997-85f38379e896
+		summarizeBy: none
+		sourceColumn: Source
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deal Stage'
+		dataType: string
+		lineageTag: 5bb192ea-ceab-4a57-9ea6-ddf8a3de248f
+		summarizeBy: none
+		sourceColumn: Deal Stage
+
+		annotation SummarizationSetBy = Automatic
+
+	column Notes
+		dataType: string
+		lineageTag: 219ba824-eea0-48b7-9310-23e3520204c0
+		summarizeBy: none
+		sourceColumn: Notes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition sanctions = m
+		mode: import
+		source =
+				let
+				    Source = Folder.Files("\\VM1-SmokeTest\data\lab\sanctions"),
+				    #"Filtered Hidden Files1" = Table.SelectRows(Source, each [Attributes]?[Hidden]? <> true),
+				    #"Invoke Custom Function1" = Table.AddColumn(#"Filtered Hidden Files1", "Transform File", each #"Transform File"([Content])),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Invoke Custom Function1", {"Name", "Source.Name"}),
+				    #"Removed Other Columns1" = Table.SelectColumns(#"Renamed Columns1", {"Source.Name", "Transform File"}),
+				    #"Expanded Table Column1" = Table.ExpandTableColumn(#"Removed Other Columns1", "Transform File", Table.ColumnNames(#"Transform File"(#"Sample File"))),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Expanded Table Column1",{{"Source.Name", type text}, {"Index", Int64.Type}, {"Account Id", type text}, {"Lead Owner", type text}, {"First Name", type text}, {"Last Name", type text}, {"Company", type text}, {"Phone 1", type text}, {"Phone 2", type text}, {"Email 1", type text}, {"Email 2", type text}, {"Website", type text}, {"Source", type text}, {"Deal Stage", type text}, {"Notes", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,167 @@
+table 'sanctions power query'
+	lineageTag: 540328b3-4d5b-4ec5-a3e9-022823059f07
+
+	/// Total number of leads (row count) in the sanctions power query table.
+	measure 'Lead Count' = COUNTROWS('sanctions power query')
+		formatString: #,0
+		lineageTag: b924db2b-458e-4a94-9971-167f026872a2
+
+	/// Distinct count of accounts based on Account Id in the sanctions power query table.
+	measure 'Distinct Accounts' = DISTINCTCOUNT('sanctions power query'[Account Id])
+		formatString: #,0
+		displayFolder: Copilot Measures
+		lineageTag: bfc67a7e-6aa7-4ea7-ba52-db41465cc8b7
+
+	/// Number of leads where Source is populated.
+	measure 'Lead Count (Has Source)' = COUNTROWS(FILTER('sanctions power query', NOT ISBLANK('sanctions power query'[Source])))
+		formatString: #,0
+		lineageTag: 61b1390d-24ea-4c47-804f-1c400b9f4655
+
+	/// Number of leads where Deal Stage is populated.
+	measure 'Lead Count (Has Deal Stage)' = COUNTROWS(FILTER('sanctions power query', NOT ISBLANK('sanctions power query'[Deal Stage])))
+		formatString: #,0
+		lineageTag: 41ccdff0-6b0d-48ad-aea2-38bcb57cac07
+
+	/// Total number of leads (row count) in the sanctions power query table.
+	measure 'Total Leads' = COUNTROWS('sanctions power query')
+		formatString: #,0
+		displayFolder: Copilot Measures
+		lineageTag: d1b0652e-125a-40d7-bbeb-50517849238a
+
+	column 'Source Name'
+		dataType: string
+		lineageTag: fbcb4eea-a14a-4c18-87c5-ddfaa230967a
+		summarizeBy: none
+		sourceColumn: Source.Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Index
+		dataType: int64
+		formatString: 0
+		lineageTag: 282c5f6f-e11e-4390-a059-c0699cf22719
+		summarizeBy: sum
+		sourceColumn: Index
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Id'
+		dataType: string
+		lineageTag: 613aa6ea-83f0-4c7a-a96b-5dd640d24c2f
+		summarizeBy: none
+		sourceColumn: Account Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Lead Owner'
+		dataType: string
+		lineageTag: 74bfe09b-50a7-4e78-a894-030156404a71
+		summarizeBy: none
+		sourceColumn: Lead Owner
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'First Name'
+		dataType: string
+		lineageTag: 46f1f89c-da85-48f2-91e6-bbb88c3a485f
+		summarizeBy: none
+		sourceColumn: First Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Name'
+		dataType: string
+		lineageTag: 80f6762e-92e2-4d4d-b4fa-ed292f2ed849
+		summarizeBy: none
+		sourceColumn: Last Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Company
+		dataType: string
+		lineageTag: eb17d3bc-011b-46bb-862d-c94e55d41071
+		summarizeBy: none
+		sourceColumn: Company
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Phone 1'
+		dataType: string
+		lineageTag: 313b39d8-89ae-4fcf-bba6-aa0a7386180b
+		summarizeBy: none
+		sourceColumn: Phone 1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Phone 2'
+		dataType: string
+		lineageTag: fe64d94e-8c28-48b7-8f92-84f001e3edcd
+		summarizeBy: none
+		sourceColumn: Phone 2
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email 1'
+		dataType: string
+		lineageTag: 2d4eb66f-6a0c-4613-83ab-66825db26a9a
+		summarizeBy: none
+		sourceColumn: Email 1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email 2'
+		dataType: string
+		lineageTag: 5eb06816-465b-4b90-8ff8-3a754170143e
+		summarizeBy: none
+		sourceColumn: Email 2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Website
+		dataType: string
+		lineageTag: 9e27a3b3-5b5d-40a8-8671-46279ccfb34d
+		summarizeBy: none
+		sourceColumn: Website
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source
+		dataType: string
+		lineageTag: 8f58c2a3-3dd1-4863-9031-80ec58d1331a
+		summarizeBy: none
+		sourceColumn: Source
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deal Stage'
+		dataType: string
+		lineageTag: 085dffac-d8b3-4ee8-8da1-d082a0ecc6de
+		summarizeBy: none
+		sourceColumn: Deal Stage
+
+		annotation SummarizationSetBy = Automatic
+
+	column Notes
+		dataType: string
+		lineageTag: b5a0a9e3-5b55-459f-8fcc-91bc5c43dcd0
+		summarizeBy: none
+		sourceColumn: Notes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'sanctions power query' = m
+		mode: import
+		source =
+				let
+				    Source = Folder.Files("C:\data2\lab\sanctions power query"),
+				    #"Filtered Hidden Files1" = Table.SelectRows(Source, each [Attributes]?[Hidden]? <> true),
+				    #"Invoke Custom Function1" = Table.AddColumn(#"Filtered Hidden Files1", "Transform File", each #"Transform File"([Content])),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Invoke Custom Function1", {"Name", "Source.Name"}),
+				    #"Removed Other Columns1" = Table.SelectColumns(#"Renamed Columns1", {"Source.Name", "Transform File"}),
+				    #"Expanded Table Column1" = Table.ExpandTableColumn(#"Removed Other Columns1", "Transform File", Table.ColumnNames(#"Transform File"(#"Sample File"))),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Expanded Table Column1",{{"Source.Name", type text}, {"Index", Int64.Type}, {"Account Id", type text}, {"Lead Owner", type text}, {"First Name", type text}, {"Last Name", type text}, {"Company", type text}, {"Phone 1", type text}, {"Phone 2", type text}, {"Email 1", type text}, {"Email 2", type text}, {"Website", type text}, {"Source", type text}, {"Deal Stage", type text}, {"Notes", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

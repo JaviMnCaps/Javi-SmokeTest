@@ -1,0 +1,43 @@
+{
+  "config": "{\"version\":\"5.73\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY26SU05\",\"type\":2,\"version\":{\"visual\":\"2.9.0\",\"report\":\"3.3.0\",\"page\":\"2.3.1\"}}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"linguisticSchemaSyncVersion\":0,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"useEnhancedTooltips\":true,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY26SU05",
+            "path": "BaseThemes/CY26SU05.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{}",
+      "displayName": "Page 1",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "a4fd9a97cdec70b9075f",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"7568d1f36cb542c19686\",\"layouts\":[{\"id\":0,\"position\":{\"x\":9.994794377928162,\"y\":0,\"z\":0,\"width\":1078.7714731910464,\"height\":720.2915148360229,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"sanctions.Account Id\"},{\"queryRef\":\"sanctions.Website\"},{\"queryRef\":\"sanctions.Source.Name\"},{\"queryRef\":\"sanctions.Source\"},{\"queryRef\":\"Sum(sanctions.Index)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"sanctions\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Account Id\"},\"Name\":\"sanctions.Account Id\",\"NativeReferenceName\":\"Account Id\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Website\"},\"Name\":\"sanctions.Website\",\"NativeReferenceName\":\"Website\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Source.Name\"},\"Name\":\"sanctions.Source.Name\",\"NativeReferenceName\":\"Source.Name\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Source\"},\"Name\":\"sanctions.Source\",\"NativeReferenceName\":\"Source\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Index\"}},\"Function\":0},\"Name\":\"Sum(sanctions.Index)\",\"NativeReferenceName\":\"Sum of Index\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Index\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 720.29,
+          "queryBinary": "H4sIAAAAAAAEAL2UTU8CMRCG/wrpSZOGsKCXvfFpiFERDBwIh9Id1hq23XRbhZD973a6iwsG9IDxtp13+s4zm87sSFclCZNRRsL5jkzAfRvBny3obY8ZNnllKZQpJNwRL+DHFHQmlCRhk5KBVom//sgSICHJCCV9Z2O2eGCSG5eJwZdt6vRGvqCu0hq48be6am0Tiab9TaohK3wdjLKawxhW1cGb5zklI61S0L5Am3NlpakNI+KEPcK+av1ARtWId7QEDZJDmXzkcDHPDJaZMHASZq+dI6nuXoxRKHVvfArlUD+Hc+zxR0g/0PwC4hnacawhZqYsfQxyIeBQRrDxwYEtyPC1fuFObHJVIfvk6/PINqmpVa20dC/+SUegO1v/5HtCQ+kf0G+s/99gni9cpCNkJGSMBiMtElbM+Z1WNnXhYj84qzcoxzmcN2hAm7RFb3Ce7dIow9auIe+Gy2MMkeX7PjAwRXoH1qKHJWausPoounNjSMLbBjLRascEOf4k4BbNHsBowbN7gRspQPZPEwfDX8UEAAA=",
+          "width": 1078.77,
+          "x": 9.99,
+          "y": 0.00,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ]
+}
